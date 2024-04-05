@@ -61,4 +61,16 @@ class CustomerTest {
         assertFeeAndPoints(300, 2);
     }
 
+    /**
+     * Exigence 4:
+     * Les films pour enfants sont loués 1 $ par jour et rapportent 1 point
+     *
+     * @throws Exception
+     */
+    @Test
+    void childrenMovie_OneDay() throws Exception {
+        customer.addRental("ChildrenMovie", 1);
+        assertFeeAndPoints(100, 1);
+    }
+
 }
