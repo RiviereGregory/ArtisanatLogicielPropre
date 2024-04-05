@@ -9,19 +9,18 @@ public class Customer {
     }
 
     public double getRentalFee() {
-        double fee = 1.5;
-        if (days > 3) {
-            fee += 1.5 * (days - 3);
-        }
-        return fee;
+        return applyGracePeriod(150, 3);
     }
 
     public int getRenterPoints() {
-        int point = 1;
-        if (days > 3) {
-            point += (days - 3);
+        return applyGracePeriod(1, 3);
+    }
+
+    private int applyGracePeriod(int amount, int grace) {
+        if (days > grace) {
+            return amount + amount * (days - grace);
         }
-        return point;
+        return amount;
     }
 
 }

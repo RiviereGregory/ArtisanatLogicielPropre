@@ -29,7 +29,7 @@ class CustomerTest {
     @Test
     void regularMovie_OneDay() throws Exception {
         customer.addRental("RegularMovie", 1);
-        assertFeeAndPoints(1.5, 1);
+        assertFeeAndPoints(150, 1);
     }
 
     /**
@@ -42,9 +42,9 @@ class CustomerTest {
     @Test
     void regularMovie_SecondAndThirdDayFree() throws Exception {
         customer.addRental("RegularMovie", 2);
-        assertFeeAndPoints(1.5, 1);
+        assertFeeAndPoints(150, 1);
         customer.addRental("RegularMovie", 3);
-        assertFeeAndPoints(1.5, 1);
+        assertFeeAndPoints(150, 1);
 
     }
 
@@ -58,7 +58,7 @@ class CustomerTest {
     @Test
     void regularMovie_FourDays() throws Exception {
         customer.addRental("RegularMovie", 4);
-        assertFeeAndPoints(3.0, 2);
+        assertFeeAndPoints(300, 2);
     }
 
 }
