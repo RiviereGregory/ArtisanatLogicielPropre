@@ -48,4 +48,17 @@ class CustomerTest {
 
     }
 
+    /**
+     * Exigence 3:
+     * Tous les jours à compter du quatrième, le coût journalier revient
+     * à 1,5 $ avec un gain de 1 point de fidélité
+     *
+     * @throws Exception
+     */
+    @Test
+    void regularMovie_FourDays() throws Exception {
+        customer.addRental("RegularMovie", 4);
+        assertFeeAndPoints(3.0, 2);
+    }
+
 }
