@@ -7,11 +7,11 @@ public class Customer {
     }
 
     public double getRentalFee() {
-        return 0.0;
+        return 1.5;
     }
 
     public int getRenterPoints() {
-        return 0;
+        return 1;
     }
 
 }
