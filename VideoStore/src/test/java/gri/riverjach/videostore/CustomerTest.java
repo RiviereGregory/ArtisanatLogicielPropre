@@ -32,4 +32,20 @@ class CustomerTest {
         assertFeeAndPoints(1.5, 1);
     }
 
+    /**
+     * Exigence 2:
+     * Les deuxièmes et troisième jours de location ordinaire
+     * sont gratuits, mais ne donnent pas droit à aucun point
+     *
+     * @throws Exception
+     */
+    @Test
+    void regularMovie_SecondAndThirdDayFree() throws Exception {
+        customer.addRental("RegularMovie", 2);
+        assertFeeAndPoints(1.5, 1);
+        customer.addRental("RegularMovie", 3);
+        assertFeeAndPoints(1.5, 1);
+
+    }
+
 }
