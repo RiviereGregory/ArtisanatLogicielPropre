@@ -19,6 +19,13 @@ class CustomerTest {
         assertEquals(point, customer.getRenterPoints());
     }
 
+    /**
+     * Exigence 1 :
+     * Les films normaux sont loués 1,5 $ le premier jour et
+     * vous collectez un point de fidelité par jour de location
+     *
+     * @throws Exception
+     */
     @Test
     void regularMovie_OneDay() throws Exception {
         customer.addRental("RegularMovie", 1);
