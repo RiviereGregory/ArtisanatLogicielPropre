@@ -1,18 +1,12 @@
 package gri.riverjach.videostore;
 
-import java.util.HashMap;
-import java.util.Map;
+import static gri.riverjach.videostore.VideoRegistry.getType;
+
 
 public class Customer {
 
     private int days;
     private String title;
-    private final Map<String, VideoType> movieRegistry = new HashMap<>();
-
-    public Customer() {
-        movieRegistry.put("RegularMovie", VideoType.REGULAR);
-        movieRegistry.put("ChildrenMovie", VideoType.CHILDREN);
-    }
 
     public void addRental(String title, int days) {
         this.days = days;
@@ -26,9 +20,6 @@ public class Customer {
         return 100;
     }
 
-    private VideoType getType(String title) {
-        return movieRegistry.get(title);
-    }
 
     public int getRenterPoints() {
         return applyGracePeriod(1, 3);

@@ -3,6 +3,7 @@ package gri.riverjach.videostore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static gri.riverjach.videostore.VideoRegistry.addMovie;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
@@ -10,8 +11,14 @@ class CustomerTest {
     private Customer customer;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         customer = new Customer();
+    }
+
+    @BeforeEach
+    void loadRegistry() {
+        addMovie("RegularMovie", VideoType.REGULAR);
+        addMovie("ChildrenMovie", VideoType.CHILDREN);
     }
 
     private void assertFeeAndPoints(double fee, int point) {
@@ -23,11 +30,9 @@ class CustomerTest {
      * Exigence 1 :
      * Les films normaux sont loués 1,5 $ le premier jour et
      * vous collectez un point de fidelité par jour de location
-     *
-     * @throws Exception
      */
     @Test
-    void regularMovie_OneDay() throws Exception {
+    void regularMovie_OneDay() {
         customer.addRental("RegularMovie", 1);
         assertFeeAndPoints(150, 1);
     }
@@ -36,11 +41,9 @@ class CustomerTest {
      * Exigence 2:
      * Les deuxièmes et troisième jours de location ordinaire
      * sont gratuits, mais ne donnent pas droit à aucun point
-     *
-     * @throws Exception
      */
     @Test
-    void regularMovie_SecondAndThirdDayFree() throws Exception {
+    void regularMovie_SecondAndThirdDayFree() {
         customer.addRental("RegularMovie", 2);
         assertFeeAndPoints(150, 1);
         customer.addRental("RegularMovie", 3);
@@ -52,11 +55,9 @@ class CustomerTest {
      * Exigence 3:
      * Tous les jours à compter du quatrième, le coût journalier revient
      * à 1,5 $ avec un gain de 1 point de fidélité
-     *
-     * @throws Exception
      */
     @Test
-    void regularMovie_FourDays() throws Exception {
+    void regularMovie_FourDays() {
         customer.addRental("RegularMovie", 4);
         assertFeeAndPoints(300, 2);
     }
@@ -64,11 +65,9 @@ class CustomerTest {
     /**
      * Exigence 4:
      * Les films pour enfants sont loués 1 $ par jour et rapportent 1 point
-     *
-     * @throws Exception
      */
     @Test
-    void childrenMovie_OneDay() throws Exception {
+    void childrenMovie_OneDay() {
         customer.addRental("ChildrenMovie", 1);
         assertFeeAndPoints(100, 1);
     }
