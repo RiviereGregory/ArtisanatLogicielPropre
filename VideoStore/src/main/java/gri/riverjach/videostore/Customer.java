@@ -2,16 +2,26 @@ package gri.riverjach.videostore;
 
 public class Customer {
 
-    public void addRental(String regularMovie, int i) {
+    private int days;
 
+    public void addRental(String title, int days) {
+        this.days = days;
     }
 
     public double getRentalFee() {
-        return 1.5;
+        double fee = 1.5;
+        if (days > 3) {
+            fee += 1.5 * (days - 3);
+        }
+        return fee;
     }
 
     public int getRenterPoints() {
-        return 1;
+        int point = 1;
+        if (days > 3) {
+            point += (days - 3);
+        }
+        return point;
     }
 
 }
