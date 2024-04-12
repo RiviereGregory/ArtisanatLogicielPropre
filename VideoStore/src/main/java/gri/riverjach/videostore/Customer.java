@@ -1,35 +1,45 @@
 package gri.riverjach.videostore;
 
-import static gri.riverjach.videostore.VideoRegistry.getType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Customer {
 
     private static final int GRACE = 3;
-    private int days;
-    private String title;
+
+    private final List<Rental> rentals = new ArrayList<>();
 
     public void addRental(String title, int days) {
-        this.days = days;
-        this.title = title;
+        rentals.add(new Rental(days, title));
     }
 
     public int getRentalFee() {
-        if (getType(title) == VideoType.REGULAR) {
-            return applyGracePeriod(150);
+        int totalRental = 0;
+        for (Rental rental : rentals) {
+            if (rental.getType() == VideoType.REGULAR) {
+                totalRental += applyGracePeriod(150, rental.getDays());
+            } else {
+                totalRental += rental.getDays() * 100;
+            }
         }
-        return days * 100;
+        return totalRental;
     }
 
 
     public int getRenterPoints() {
-        if (getType(title) == VideoType.REGULAR) {
-            return applyGracePeriod(1);
+        int points = 0;
+        for (Rental rental : rentals) {
+            if (rental.getType() == VideoType.REGULAR) {
+                points += applyGracePeriod(1, rental.getDays());
+            } else {
+                points++;
+            }
         }
-        return 1;
+        return points;
     }
 
-    private int applyGracePeriod(int amount) {
+    private int applyGracePeriod(int amount, int days) {
         if (days > GRACE) {
             return amount + amount * (days - GRACE);
         }
