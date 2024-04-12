@@ -17,11 +17,17 @@ public class Customer {
     public int getRentalFee() {
         int totalRental = 0;
         for (Rental rental : rentals) {
-            if (rental.getType() == VideoType.REGULAR) {
-                totalRental += applyGracePeriod(150, rental.getDays());
-            } else {
-                totalRental += rental.getDays() * 100;
-            }
+            totalRental += totalRentalFor(rental);
+        }
+        return totalRental;
+    }
+
+    private int totalRentalFor(Rental rental) {
+        int totalRental = 0;
+        if (rental.getType() == VideoType.REGULAR) {
+            totalRental += applyGracePeriod(150, rental.getDays());
+        } else {
+            totalRental += rental.getDays() * 100;
         }
         return totalRental;
     }
@@ -30,11 +36,17 @@ public class Customer {
     public int getRenterPoints() {
         int points = 0;
         for (Rental rental : rentals) {
-            if (rental.getType() == VideoType.REGULAR) {
-                points += applyGracePeriod(1, rental.getDays());
-            } else {
-                points++;
-            }
+            points += pointsFor(rental);
+        }
+        return points;
+    }
+
+    private int pointsFor(Rental rental) {
+        int points = 0;
+        if (rental.getType() == VideoType.REGULAR) {
+            points += applyGracePeriod(1, rental.getDays());
+        } else {
+            points++;
         }
         return points;
     }
