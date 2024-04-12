@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
 
+    public static final String REGULAR_MOVIE = "RegularMovie";
+    public static final String CHILDREN_MOVIE = "ChildrenMovie";
     private Customer customer;
 
     @BeforeEach
@@ -17,8 +19,8 @@ class CustomerTest {
 
     @BeforeEach
     void loadRegistry() {
-        addMovie("RegularMovie", VideoType.REGULAR);
-        addMovie("ChildrenMovie", VideoType.CHILDREN);
+        addMovie(REGULAR_MOVIE, VideoType.REGULAR);
+        addMovie(CHILDREN_MOVIE, VideoType.CHILDREN);
     }
 
     private void assertFeeAndPoints(double fee, int point) {
@@ -33,7 +35,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_OneDay() {
-        customer.addRental("RegularMovie", 1);
+        customer.addRental(REGULAR_MOVIE, 1);
         assertFeeAndPoints(150, 1);
     }
 
@@ -44,9 +46,9 @@ class CustomerTest {
      */
     @Test
     void regularMovie_SecondAndThirdDayFree() {
-        customer.addRental("RegularMovie", 2);
+        customer.addRental(REGULAR_MOVIE, 2);
         assertFeeAndPoints(150, 1);
-        customer.addRental("RegularMovie", 3);
+        customer.addRental(REGULAR_MOVIE, 3);
         assertFeeAndPoints(150, 1);
 
     }
@@ -58,7 +60,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_FourDays() {
-        customer.addRental("RegularMovie", 4);
+        customer.addRental(REGULAR_MOVIE, 4);
         assertFeeAndPoints(300, 2);
     }
 
@@ -68,7 +70,7 @@ class CustomerTest {
      */
     @Test
     void childrenMovie_OneDay() {
-        customer.addRental("ChildrenMovie", 1);
+        customer.addRental(CHILDREN_MOVIE, 1);
         assertFeeAndPoints(100, 1);
     }
 
@@ -78,8 +80,19 @@ class CustomerTest {
      */
     @Test
     void childrenMovie_FourDay() {
-        customer.addRental("ChildrenMovie", 4);
+        customer.addRental(CHILDREN_MOVIE, 4);
         assertFeeAndPoints(400, 1);
     }
 
+    /**
+     * Exigence :
+     * Gérer plusieurs film à la fois
+     */
+    @Test
+    void oneRegularOneChildren_FourDay() {
+        customer.addRental(REGULAR_MOVIE, 4); // 3$ + 2pts
+        customer.addRental(CHILDREN_MOVIE, 4); // 4$ + 1pts
+
+        assertFeeAndPoints(700, 3);
+    }
 }
