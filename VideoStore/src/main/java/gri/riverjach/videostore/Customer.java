@@ -5,6 +5,7 @@ import static gri.riverjach.videostore.VideoRegistry.getType;
 
 public class Customer {
 
+    private static final int GRACE = 3;
     private int days;
     private String title;
 
@@ -15,19 +16,22 @@ public class Customer {
 
     public int getRentalFee() {
         if (getType(title) == VideoType.REGULAR) {
-            return applyGracePeriod(150, 3);
+            return applyGracePeriod(150);
         }
-        return 100;
+        return days * 100;
     }
 
 
     public int getRenterPoints() {
-        return applyGracePeriod(1, 3);
+        if (getType(title) == VideoType.REGULAR) {
+            return applyGracePeriod(1);
+        }
+        return 1;
     }
 
-    private int applyGracePeriod(int amount, int grace) {
-        if (days > grace) {
-            return amount + amount * (days - grace);
+    private int applyGracePeriod(int amount) {
+        if (days > GRACE) {
+            return amount + amount * (days - GRACE);
         }
         return amount;
     }
