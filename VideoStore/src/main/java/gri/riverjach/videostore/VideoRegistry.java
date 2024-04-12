@@ -2,6 +2,7 @@ package gri.riverjach.videostore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class VideoRegistry {
 
@@ -11,8 +12,14 @@ public class VideoRegistry {
         throw new IllegalStateException("Utility class");
     }
 
-    public static VideoType getType(String title) {
-        return movieRegistry.get(title);
+    public static Movie getMovie(String title) {
+        VideoType videoType = movieRegistry.get(title);
+        if (Objects.requireNonNull(videoType) == VideoType.REGULAR) {
+            return new RegularMovie();
+        } else if (videoType == VideoType.CHILDREN) {
+            return new ChildrenMovie();
+        }
+        return null;
     }
 
     public static void addMovie(String title, VideoType type) {
