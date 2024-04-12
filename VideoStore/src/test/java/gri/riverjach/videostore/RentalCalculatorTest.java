@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import static gri.riverjach.videostore.VideoRegistry.addMovie;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CustomerTest {
+class RentalCalculatorTest {
 
     public static final String REGULAR_MOVIE = "RegularMovie";
     public static final String CHILDREN_MOVIE = "ChildrenMovie";
-    private Customer customer;
+    private RentalCalculator rentalCalculator;
 
     @BeforeEach
     void setUp() {
-        customer = new Customer();
+        rentalCalculator = new RentalCalculator();
     }
 
     @BeforeEach
@@ -24,8 +24,8 @@ class CustomerTest {
     }
 
     private void assertFeeAndPoints(double fee, int point) {
-        assertEquals(fee, customer.getRentalFee(), 0.001);
-        assertEquals(point, customer.getRenterPoints());
+        assertEquals(fee, rentalCalculator.getRentalFee(), 0.001);
+        assertEquals(point, rentalCalculator.getRenterPoints());
     }
 
     /**
@@ -35,7 +35,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_OneDay() {
-        customer.addRental(REGULAR_MOVIE, 1);
+        rentalCalculator.addRental(REGULAR_MOVIE, 1);
         assertFeeAndPoints(150, 1);
     }
 
@@ -46,7 +46,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_SecondDayFree() {
-        customer.addRental(REGULAR_MOVIE, 2);
+        rentalCalculator.addRental(REGULAR_MOVIE, 2);
         assertFeeAndPoints(150, 1);
     }
 
@@ -57,7 +57,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_ThirdDayFree() {
-        customer.addRental(REGULAR_MOVIE, 3);
+        rentalCalculator.addRental(REGULAR_MOVIE, 3);
         assertFeeAndPoints(150, 1);
 
     }
@@ -69,7 +69,7 @@ class CustomerTest {
      */
     @Test
     void regularMovie_FourDays() {
-        customer.addRental(REGULAR_MOVIE, 4);
+        rentalCalculator.addRental(REGULAR_MOVIE, 4);
         assertFeeAndPoints(300, 2);
     }
 
@@ -79,7 +79,7 @@ class CustomerTest {
      */
     @Test
     void childrenMovie_OneDay() {
-        customer.addRental(CHILDREN_MOVIE, 1);
+        rentalCalculator.addRental(CHILDREN_MOVIE, 1);
         assertFeeAndPoints(100, 1);
     }
 
@@ -89,7 +89,7 @@ class CustomerTest {
      */
     @Test
     void childrenMovie_FourDay() {
-        customer.addRental(CHILDREN_MOVIE, 4);
+        rentalCalculator.addRental(CHILDREN_MOVIE, 4);
         assertFeeAndPoints(400, 1);
     }
 
@@ -99,8 +99,8 @@ class CustomerTest {
      */
     @Test
     void oneRegularOneChildren_FourDay() {
-        customer.addRental(REGULAR_MOVIE, 4); // 3$ + 2pts
-        customer.addRental(CHILDREN_MOVIE, 4); // 4$ + 1pts
+        rentalCalculator.addRental(REGULAR_MOVIE, 4); // 3$ + 2pts
+        rentalCalculator.addRental(CHILDREN_MOVIE, 4); // 4$ + 1pts
 
         assertFeeAndPoints(700, 3);
     }
