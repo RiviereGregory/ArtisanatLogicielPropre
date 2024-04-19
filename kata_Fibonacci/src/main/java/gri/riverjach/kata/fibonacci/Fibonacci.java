@@ -10,7 +10,7 @@ public class Fibonacci {
 
     public static BigInteger fibonacciSuite(int number) {
         if (number > 1) {
-            return BigInteger.valueOf(2);
+            return fibonacciSuite(number - 1).add(fibonacciSuite(number - 2));
         }
         return BigInteger.valueOf(1);
     }
