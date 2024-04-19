@@ -22,4 +22,9 @@ class FibonacciTest {
         assertEquals(BigInteger.valueOf(2), Fibonacci.fibonacciSuite(2));
     }
 
+    @Test
+    void when3ThenResult3() {
+        assertEquals(BigInteger.valueOf(3), Fibonacci.fibonacciSuite(3));
+    }
+
 }
