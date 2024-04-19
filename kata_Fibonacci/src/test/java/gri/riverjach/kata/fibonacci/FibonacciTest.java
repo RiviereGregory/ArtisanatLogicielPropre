@@ -17,4 +17,9 @@ class FibonacciTest {
         assertEquals(BigInteger.ONE, Fibonacci.fibonacciSuite(1));
     }
 
+    @Test
+    void when2ThenResult2() {
+        assertEquals(new BigInteger("2"), Fibonacci.fibonacciSuite(2));
+    }
+
 }
