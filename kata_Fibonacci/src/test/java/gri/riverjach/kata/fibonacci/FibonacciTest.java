@@ -19,7 +19,7 @@ class FibonacciTest {
 
     @Test
     void when2ThenResult2() {
-        assertEquals(new BigInteger("2"), Fibonacci.fibonacciSuite(2));
+        assertEquals(BigInteger.valueOf(2), Fibonacci.fibonacciSuite(2));
     }
 
 }

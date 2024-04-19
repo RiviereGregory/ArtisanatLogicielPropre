@@ -10,8 +10,8 @@ public class Fibonacci {
 
     public static BigInteger fibonacciSuite(int number) {
         if (number > 1) {
-            return new BigInteger("2");
+            return BigInteger.valueOf(2);
         }
-        return new BigInteger("1");
+        return BigInteger.valueOf(1);
     }
 }
