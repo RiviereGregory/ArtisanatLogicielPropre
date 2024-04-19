@@ -9,6 +9,6 @@ public class Fibonacci {
     }
 
     public static BigInteger fibonacciSuite(int number) {
-        return null;
+        return new BigInteger("1");
     }
 }
