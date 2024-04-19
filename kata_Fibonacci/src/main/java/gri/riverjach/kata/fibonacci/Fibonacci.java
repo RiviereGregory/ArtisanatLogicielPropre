@@ -9,9 +9,13 @@ public class Fibonacci {
     }
 
     public static BigInteger fibonacciSuite(int number) {
+        return fibonacciSuite(BigInteger.ONE, BigInteger.ONE, number);
+    }
+
+    private static BigInteger fibonacciSuite(BigInteger sumFib2, BigInteger sumFib1, int number) {
         if (number > 1) {
-            return fibonacciSuite(number - 1).add(fibonacciSuite(number - 2));
+            return fibonacciSuite(sumFib1, sumFib1.add(sumFib2), number - 1);
         }
-        return BigInteger.valueOf(1);
+        return sumFib1;
     }
 }
