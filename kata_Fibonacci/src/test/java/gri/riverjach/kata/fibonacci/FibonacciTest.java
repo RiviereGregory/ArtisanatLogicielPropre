@@ -11,4 +11,10 @@ class FibonacciTest {
     void when0ThenResult1() {
         assertEquals(BigInteger.ONE, Fibonacci.fibonacciSuite(0));
     }
+
+    @Test
+    void when1ThenResult1() {
+        assertEquals(BigInteger.ONE, Fibonacci.fibonacciSuite(1));
+    }
+
 }
